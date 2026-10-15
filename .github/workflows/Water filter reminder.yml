@@ -1,0 +1,24 @@
+name: Water Filter Reminder
+
+on:
+  schedule:
+    # 1st of every month, 05:00 UTC = 08:00 KSA
+    - cron: "0 5 1 * *"
+  workflow_dispatch:
+
+jobs:
+  send-reminder:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Send reminder email
+        env:
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+        run: python send_reminder.py
