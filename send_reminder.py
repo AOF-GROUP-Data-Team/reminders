@@ -51,12 +51,12 @@ def build_message():
             <p style="margin:0 0 12px;">
               نرجو التكرم بجدولة الزيارات وإتمام التغيير في جميع الفروع، وإفادتنا عند الانتهاء.
             </p>
-            <p style="margin:24px 0 0;">مع خالص التحية،<br>إدارة ذكاء الأعمال</p>
+            <p style="margin:24px 0 0;">مع خالص التحية،<br></p>
           </td>
         </tr>
         <tr>
           <td style="background:#f8f9fa;color:#888;padding:12px 24px;font-size:12px;text-align:right;">
-            هذه رسالة آلية تُرسل في اليوم الأول من كل شهر.
+            .
           </td>
         </tr>
       </table>
