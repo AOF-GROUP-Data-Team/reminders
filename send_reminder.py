@@ -84,6 +84,14 @@ def build_message():
 
 
 def main():
+    mode = os.environ.get("MODE", "auto").strip().lower()
+    today = datetime.now(KSA)
+    print(f"Mode: {mode} | KSA now: {today:%Y-%m-%d %H:%M}")
+
+    if mode != "force" and today.day != 1:
+        print("Not the 1st of the month (KSA) - nothing sent.")
+        return
+
     msg, subject = build_message()
     with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
         server.login(SENDER_EMAIL, SENDER_PASSWORD)
