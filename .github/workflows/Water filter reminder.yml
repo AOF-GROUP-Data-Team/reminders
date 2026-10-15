@@ -1,10 +1,18 @@
 name: Water Filter Reminder
 
+# Triggered by the "github alarm" Apps Script every day at 09:00 KSA.
+# The script itself only sends on the 1st of the month (KSA time).
 on:
-  schedule:
-    # 1st of every month, 05:00 UTC = 08:00 KSA
-    - cron: "0 5 1 * *"
   workflow_dispatch:
+    inputs:
+      mode:
+        description: "auto = send only if today is the 1st (KSA) | force = send now (testing)"
+        required: false
+        default: "auto"
+        type: choice
+        options:
+          - auto
+          - force
 
 jobs:
   send-reminder:
@@ -21,4 +29,5 @@ jobs:
       - name: Send reminder email
         env:
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          MODE: ${{ github.event.inputs.mode || 'auto' }}
         run: python send_reminder.py
